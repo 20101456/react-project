@@ -8,6 +8,8 @@ function MovieListPageTemplate({ movies, title, selectFavorite }) {
   const [nameFilter, setNameFilter] = useState("");
   const [genreFilter, setGenreFilter] = useState("0");
   const genreId = Number(genreFilter);
+  
+  
 
   let displayedMovies = movies
     .filter((m) => {

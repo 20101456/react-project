@@ -22,6 +22,7 @@ export const getGenres = () => {
     .then(json => json.genres);
 };
 
+
 export const getMovieImages = (id) => {
   return fetch(
     `https://api.themoviedb.org/3/movie/${id}/images?api_key=${process.env.REACT_APP_TMDB_KEY}`

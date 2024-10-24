@@ -24,6 +24,11 @@ const chip = { margin: 0.5 };
 const MovieDetails = ({ movie }) => {
   const [drawerOpen, setDrawerOpen] = useState(false);
 
+  // Map through production countries and join them into a single string
+  const productionCountries = movie.production_countries
+    .map((country) => country.name)
+    .join(", ");
+
   return (
     <>
       <Typography variant="h5" component="h3">
@@ -59,6 +64,13 @@ const MovieDetails = ({ movie }) => {
         />
         <Chip label={`Released: ${movie.release_date}`} />
       </Paper>
+
+      
+      <Paper component="ul" sx={{ ...root }}>
+        <Chip label="Production Countries" sx={{ ...chip }} color="primary" />
+        <Chip label={productionCountries} sx={{ ...chip }} />
+      </Paper>
+
       <Fab
         color="secondary"
         variant="extended"
