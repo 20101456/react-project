@@ -12,6 +12,7 @@ import { excerpt } from "../../util";
 import { useQuery } from "react-query";
 import Spinner from '../spinner'
 
+const MovieReviewsTable = ({ movie }) => {
 const { data , error, isLoading, isError } = useQuery(
   ["reviews", { id: movie.id }],
   getMovieReviews
@@ -61,3 +62,6 @@ const reviews = data.results;
       </Table>
     </TableContainer>
   );
+};
+ 
+export default MovieReviewsTable;
