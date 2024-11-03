@@ -4,6 +4,7 @@ import PageTemplate from '../components/templateMovieListPage';
 import { useQuery } from 'react-query';
 import Spinner from '../components/spinner';
 import AddToFavoritesIcon from '../components/cardIcons/addToFavorites'
+import AddToMustWatchIcon from "../components/cardIcons/addToMustWatch";
 
 const UpcomingMoviesPage = (props) => {
 
@@ -19,16 +20,16 @@ const UpcomingMoviesPage = (props) => {
   const movies = data.results;
 
   // Redundant, but necessary to avoid app crashing.
-  const favorites = movies.filter(m => m.favorite)
-  localStorage.setItem('favorites', JSON.stringify(favorites))
-  const addToFavorites = (movieId) => true 
+  const mustWatch = movies.filter(m => m.mustWatch)
+  localStorage.setItem('mustWatch', JSON.stringify(mustWatch))
+  const addToMustWatch = (movieId) => true 
 
   return (
     <PageTemplate
       title="Upcoming Movies"
       movies={movies}
       action={(movie) => {
-        return <AddToFavoritesIcon movie={movie} />
+        return <AddToMustWatchIcon movie={movie} />
       }}
     />
 );
