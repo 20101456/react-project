@@ -2,7 +2,7 @@ import React from "react";
 import { useParams } from 'react-router-dom';
 import MovieDetails from "../components/movieDetails/";
 import PageTemplate from "../components/templateMoviePage";
-import { getMovie } from '../api/tmdb-api'
+import { getMovie, getMovieRecommendations } from '../api/tmdb-api'
 import { useQuery } from "react-query";
 import Spinner from '../components/spinner'
 // import useMovie from "../hooks/useMovie";   Redundant
@@ -14,7 +14,14 @@ const MoviePage = (props) => {
     getMovie
   );
 
-  if (isLoading) {
+  const {
+    data: recommendations,
+    isLoading: recommendationsLoading,
+    isError: recommendationsError,
+    error: recommendationsErrorMessage,
+  } = useQuery(["recommendations", { id: id }], getMovieRecommendations);
+
+  if (isLoading || recommendationsLoading) {
     return <Spinner />;
   }
 
@@ -22,12 +29,16 @@ const MoviePage = (props) => {
     return <h1>{error.message}</h1>;
   }
 
+  if (recommendationsError) {
+    return <h1>{recommendationsErrorMessage.message}</h1>
+  }
+
   return (
     <>
       {movie ? (
         <>
           <PageTemplate movie={movie}>
-            <MovieDetails movie={movie} />
+            <MovieDetails movie={movie} recommendations={recommendations.results} />
           </PageTemplate>
         </>
       ) : (

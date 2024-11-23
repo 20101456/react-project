@@ -21,7 +21,7 @@ const root = {
 };
 const chip = { margin: 0.5 };
 
-const MovieDetails = ({ movie }) => {
+const MovieDetails = ({ movie, recommendations }) => {
   const [drawerOpen, setDrawerOpen] = useState(false);
 
   // Map through production countries and join them into a single string
@@ -69,6 +69,22 @@ const MovieDetails = ({ movie }) => {
       <Paper component="ul" sx={{ ...root }}>
         <Chip label="Production Countries" sx={{ ...chip }} color="primary" />
         <Chip label={productionCountries} sx={{ ...chip }} />
+      </Paper>
+
+
+      <Typography variant="h5" component="h3" sx={{ marginTop: 3 }}>
+        Recommended Movies
+      </Typography>
+      <Paper component="ul" sx={{ ...root }}>
+        {recommendations.map((movie) => (
+          <li key={movie.id}>
+            <Chip
+              label={movie.title}
+              sx={{ ...chip }}
+              onClick={() => window.location.href = `/movies/${movie.id}`}
+            />
+          </li>
+        ))}
       </Paper>
 
       <Fab

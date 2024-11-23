@@ -136,29 +136,12 @@ export const getNowPlaying = () => {
   });
 };
 
-export const getTVShows = () => {
-  return fetch(
-    `https://api.themoviedb.org/3/discover/tv?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&include_adult=false&include_video=false&page=1`
-  ).then((response) => {
-    if (!response.ok) {
-      return response.json().then((error) => {
-        throw new Error(error.status_message || "Something went wrong");
-      });
-    }
-    return response.json();
-  })
-  .catch((error) => {
-      throw error
-  });
-};
-
-export const getTVShow = (args) => {
-  //console.log(args)
-  const [, idPart] = args.queryKey;
+export const getMovieRecommendations = ({ queryKey }) => {
+  const [, idPart] = queryKey;
   const { id } = idPart;
   return fetch(
-    `https://api.themoviedb.org/3/tv/${id}?api_key=${process.env.REACT_APP_TMDB_KEY}`
-  ).then((response) => {
+    `https://api.themoviedb.org/3/movie/${id}/recommendations?api_key=${process.env.REACT_APP_TMDB_KEY}`
+  ).then( (response) => {
     if (!response.ok) {
       return response.json().then((error) => {
         throw new Error(error.status_message || "Something went wrong");
@@ -170,3 +153,4 @@ export const getTVShow = (args) => {
     throw error
  });
 };
+
