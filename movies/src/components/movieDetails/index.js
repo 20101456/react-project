@@ -9,6 +9,7 @@ import Fab from "@mui/material/Fab";
 import Typography from "@mui/material/Typography";
 import Drawer from "@mui/material/Drawer";
 import MovieReviews from "../movieReviews"
+import RecommendedMovies from "../recommendedMovies";
 
 
 const root = {
@@ -75,17 +76,7 @@ const MovieDetails = ({ movie, recommendations }) => {
       <Typography variant="h5" component="h3" sx={{ marginTop: 3 }}>
         Recommended Movies
       </Typography>
-      <Paper component="ul" sx={{ ...root }}>
-        {recommendations.map((movie) => (
-          <li key={movie.id}>
-            <Chip
-              label={movie.title}
-              sx={{ ...chip }}
-              onClick={() => window.location.href = `/movies/${movie.id}`}
-            />
-          </li>
-        ))}
-      </Paper>
+      <RecommendedMovies movies={recommendations} />
 
       <Fab
         color="secondary"
