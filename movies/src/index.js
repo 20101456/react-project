@@ -13,6 +13,7 @@ import AddMovieReviewPage from './pages/addMovieReviewPage'
 import UpcomingMoviesPage from './pages/upcomingMoviesPage'
 import PopularMoviesPage from './pages/popularMoviesPage'
 import NowPlayingMoviesPage from "./pages/nowPlaying";
+import ThemeContextProvider from "./contexts/ThemeContext";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -27,6 +28,7 @@ const queryClient = new QueryClient({
 const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
+      <ThemeContextProvider>
       <BrowserRouter>
         <SiteHeader />
         <MoviesContextProvider>
@@ -43,6 +45,7 @@ const App = () => {
         </Routes>
         </MoviesContextProvider>
       </BrowserRouter>
+      </ThemeContextProvider>
       <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
   );
